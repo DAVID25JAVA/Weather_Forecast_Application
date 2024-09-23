@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_KEY = "dc16b1f9ceaf2ae6d6096349f910f2c6";
-
 export const useWeather = (city) => {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,13 +14,13 @@ export const useWeather = (city) => {
       try {
         // Fetch current weather data
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${import.meta.env.VITE_Weather_Forecast_API_KEY}&units=metric`
         );
         setWeatherData(response.data);
 
         // Fetch 5-day forecast data
         const forecastResponse = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${import.meta.env.VITE_Weather_Forecast_API_KEY}&units=metric`
         );
         setForecastData(forecastResponse.data.list);
       } catch (err) {
